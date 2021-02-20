@@ -15,10 +15,10 @@ const App = () => {
       <h1>Lambda Eats</h1>
       <p>You can remove this code and create your own header</p>
       <Link to='/'><button>Home</button></Link><br></br>
-      <Link to="/Form"><button>Order Pizza</button></Link>
+      <Link to="/pizza"><button>Order Pizza</button></Link>
       </nav>
     
-    <Route path="/Form">
+    <Route path="/pizza">
       <Form/>
     </Route>
     <Route path='/Confirmation'>
