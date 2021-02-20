@@ -1,12 +1,33 @@
 import React from "react";
+import { Route, Link, Switch } from 'react-router-dom';
+import Form from './Form.js';
+import Confirmation from './Confirmation';
 
 const App = () => {
+ 
+ 
+ 
+ 
   return (
-    <>
+    
+    <div className="header-container">
+      <nav>
       <h1>Lambda Eats</h1>
       <p>You can remove this code and create your own header</p>
-      <h2>Test</h2>
-    </>
+      <Link to='/'><button>Home</button></Link><br></br>
+      <Link to="/Form"><button>Order Pizza</button></Link>
+      </nav>
+    
+    <Route path="/Form">
+      <Form/>
+    </Route>
+    <Route path='/Confirmation'>
+      <Confirmation/>
+   </Route>
+    
+    </div>
+    
+    
   );
 };
 export default App;
