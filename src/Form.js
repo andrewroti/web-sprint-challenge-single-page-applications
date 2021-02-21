@@ -16,27 +16,35 @@ const orderURL = 'https://reqres.in/api/pizza/order'
 
 function Form(){
 
-    const [form, setForm] = useState({firstName: '', lastName: '', address: '', size: '', instructions: ''})
+    const [form, setForm] = useState({firstName: '', lastName: '', address: '', size: '', toppings: [], instructions: ''})
     const [order, setOrder] = useState([]);
     const [disabled, setDisabled] = useState(true);
-    console.log(form);
+  
 
     const handleSubmit = event =>{
         event.preventDefault();
-        
-        // axios.post(orderURL, newOrder)
-        // .then(res =>{
-        //     console.log(res.data);
-        // })
-        // .catch(err =>{
-        //      console.log(err.data);
-        // })
+        const newOrder = {
+            firstName: form.firstName, 
+            lastName: form.lastName, 
+            address: form.address, 
+            size: form.size, 
+            toppings: form.toppings,
+            instructions: form.instructions
+        }
+        axios.post(orderURL, newOrder)
+        .then(res =>{
+            console.log(res.data)
+        })
+        .catch(err =>{
+            console.log(err);
+        })
          
      }
      
     
     const handleChanges = event =>{
         setForm({...form, [event.target.name]: event.target.value});
+        console.log(form)
         
     }
     useEffect(()=>{
@@ -72,10 +80,10 @@ function Form(){
                 <div className='toppings' onChange={handleChanges}>
                     <h3>Select Your Toppings</h3>
                     <ul>
-                        <li><label> Pepperoni:  <input type='checkbox' name='pepperoni'/> </label></li>
-                        <li><label> Sausage:  <input type='checkbox' name='sausage'/> </label></li>
-                        <li><label> Green Peppers:  <input type='checkbox' name='greenPeppers'/> </label></li>
-                        <li><label> Olives:  <input type='checkbox' name='olives'/> </label></li>
+                        <li><label> Pepperoni:  <input type='checkbox' name='toppings' value='pepperoni'/> </label></li>
+                        <li><label> Sausage:  <input type='checkbox' name='toppings' value='sausage'/> </label></li>
+                        <li><label> Green Peppers:  <input type='checkbox' name='toppings' value='greenPeppers'/> </label></li>
+                        <li><label> Olives:  <input type='checkbox' name='toppings' value='olives'/> </label></li>
                     </ul>
                     <div>
                         <label>
@@ -86,11 +94,11 @@ function Form(){
 
                 
 
-            <Link to='/confirmation'>
+            {/* <Link to='/confirmation'> */}
                 <button disabled={disabled}>
                     Add To Order
                 </button>
-            </Link>
+            {/* </Link> */}
             
             
             </form>
