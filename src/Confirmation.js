@@ -1,9 +1,13 @@
 import React from 'react';
 
-function Confirmation(){
+function Confirmation(props){
+    const {firstName} = props;
+    
+
 
     return(
-        <h1>Order Submitted!</h1>
+        <h1>Order Submitted for {firstName}</h1>
+
     )
 }
 

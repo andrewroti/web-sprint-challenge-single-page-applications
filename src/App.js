@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Link, Switch } from 'react-router-dom';
 import Form from './Form.js';
+
 import Confirmation from './Confirmation';
 
 const App = () => {
@@ -21,9 +22,10 @@ const App = () => {
     <Route path="/pizza">
       <Form/>
     </Route>
-    <Route path='/Confirmation'>
-      <Confirmation/>
-   </Route>
+    <Route path='/pizza/confirmation'>
+      <Confirmation />
+    </Route>
+        
     
     </div>
     
