@@ -1,25 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
-import Confirmation from './Confirmation.js'
+import * as yup from 'yup';
+import axios from 'axios';
+
+const schema = yup.object().shape({
+    firstName: yup.string().required('First name is required').min(2, 'Name must be at least 2 letters'),
+    lastName: yup.string().required('Last name is required').min(2, 'Name must be at least 2 letters'),
+    address: yup.string().required('Address is required'),
+    size: yup.string().oneOf(['sml', 'med', 'lrg', 'xl'], 'Please pick a size')
+
+})
+
+const orderURL = 'https://reqres.in/api/pizza/order'
 
 
 function Form(){
 
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({firstName: '', lastName: '', address: '', size: '', instructions: ''})
     const [order, setOrder] = useState([]);
+    const [disabled, setDisabled] = useState(true);
+    console.log(form);
 
     const handleSubmit = event =>{
         event.preventDefault();
-         console.log('Clicked!')
-         setOrder(...order, form);
+        
+        // axios.post(orderURL, newOrder)
+        // .then(res =>{
+        //     console.log(res.data);
+        // })
+        // .catch(err =>{
+        //      console.log(err.data);
+        // })
          
      }
-     console.log(form.firstName);
+     
     
     const handleChanges = event =>{
         setForm({...form, [event.target.name]: event.target.value});
         
     }
+    useEffect(()=>{
+        schema.isValid(form).then(valid => setDisabled(!valid))
+    }, [form])
+    
     
     
     return(
@@ -40,10 +63,10 @@ function Form(){
                     Size: 
                     <select name='size' onChange={handleChanges}>
                         <option>---Select A Size---</option>
-                        <option>Small (8")</option>
-                        <option>Medium (12")</option>
-                        <option>Large (14")</option>
-                        <option>Extra Large (16")</option>
+                        <option value='sml'>Small (8")</option>
+                        <option value='med'>Medium (12")</option>
+                        <option value='lrg'>Large (14")</option>
+                        <option value='xl'>Extra Large (16")</option>
                     </select>
                 </label><br/>
                 <div className='toppings' onChange={handleChanges}>
@@ -63,8 +86,8 @@ function Form(){
 
                 
 
-            <Link to='/pizza/confirmation'>
-                <button >
+            <Link to='/confirmation'>
+                <button disabled={disabled}>
                     Add To Order
                 </button>
             </Link>

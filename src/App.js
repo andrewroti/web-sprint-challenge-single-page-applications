@@ -22,7 +22,7 @@ const App = () => {
     <Route path="/pizza">
       <Form/>
     </Route>
-    <Route path='/pizza/confirmation'>
+    <Route path='/confirmation'>
       <Confirmation />
     </Route>
         
