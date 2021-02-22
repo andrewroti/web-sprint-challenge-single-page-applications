@@ -8,7 +8,7 @@ const schema = yup.object().shape({
     firstName: yup.string().required('First name is required').min(2, 'Name must be at least 2 letters'),
     lastName: yup.string().required('Last name is required').min(2, 'Name must be at least 2 letters'),
     address: yup.string().required('Address is required'),
-    size: yup.string().oneOf(['sml', 'med', 'lrg', 'xl'], 'Please pick a size')
+    size: yup.string().oneOf(['small', 'medium', 'large', 'extra large'], 'Please pick a size')
 
 })
 
@@ -18,7 +18,7 @@ const orderURL = 'https://reqres.in/api/pizza/order'
 function Form(){
 
     const [form, setForm] = useState({firstName: '', lastName: '', address: '', size: '', toppings: [], instructions: ''})
-    const [order, setOrder] = useState([]);
+    // const [order, setOrder] = useState([]);
     const [disabled, setDisabled] = useState(true);
   
 
@@ -34,7 +34,10 @@ function Form(){
         }
         axios.post(orderURL, newOrder)
         .then(res =>{
-            console.log(res.data)
+            // console.log(res.data)
+            setDisabled(true);
+            alert(`Thank you for your order, ${form.firstName}! One ${form.size} pizza coming your way. `)
+            // setForm({[newOrder.firstName]: '', [newOrder.lastName]: '', [newOrder.address]: '', [newOrder.size]: 'none', [newOrder.toppings]: [], [newOrder.instructions]: ''})
         })
         .catch(err =>{
             console.log(err);
@@ -51,6 +54,7 @@ function Form(){
     useEffect(()=>{
         schema.isValid(form).then(valid => setDisabled(!valid))
     }, [form])
+
     
     
     
@@ -75,11 +79,11 @@ function Form(){
                 
                     Size: <br/>
                     <select name='size' onChange={handleChanges} className='size'>
-                        <option>---Select A Size---</option>
-                        <option value='sml'>Small (8")</option>
-                        <option value='med'>Medium (12")</option>
-                        <option value='lrg'>Large (14")</option>
-                        <option value='xl'>Extra Large (16")</option>
+                        <option value="none">---Select A Size---</option>
+                        <option value='small'>Small (8")</option>
+                        <option value='medium'>Medium (12")</option>
+                        <option value='large'>Large (14")</option>
+                        <option value='extra large'>Extra Large (16")</option>
                     </select>
                 </label><br/>
                 <div className='toppings' onChange={handleChanges}>
@@ -100,7 +104,7 @@ function Form(){
                 
 
             {/* <Link to='/confirmation'> */}
-                <button className="submit" disabled={disabled}>
+                <button className="submit" disabled={disabled} >
                     Add To Order
                 </button>
             {/* </Link> */}
