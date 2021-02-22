@@ -1,0 +1,26 @@
+.form-container{
+    display:  flex;
+    border: 1px solid #61DAFB;
+    width:75%;
+    margin: auto;
+    margin-top: 15px;
+    
+    text-align: center;
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px #61DAFB;
+    
+}
+.text-container{
+    display: flex;
+   padding: 10px 10px;
+   margin-bottom: 15px;
+}
+.size{
+    margin-top: 15px;
+}
+.submit{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

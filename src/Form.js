@@ -2,6 +2,7 @@ import React, { useState , useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
 import * as yup from 'yup';
 import axios from 'axios';
+import './Form.css';
 
 const schema = yup.object().shape({
     firstName: yup.string().required('First name is required').min(2, 'Name must be at least 2 letters'),
@@ -57,6 +58,7 @@ function Form(){
        <div>
         <div className='form-container'>
             <form onSubmit={handleSubmit}>
+                <div className='text-container'>
                 <label>
                     First Name:
                     <input type='text' name='firstName' onChange={handleChanges}/><br/>
@@ -67,9 +69,12 @@ function Form(){
                 <label> Delivery Address: 
                     <input type='text' name='address' onChange={handleChanges}/><br/>
                 </label>
-                <label>
-                    Size: 
-                    <select name='size' onChange={handleChanges}>
+                </div>
+                
+                <label >
+                
+                    Size: <br/>
+                    <select name='size' onChange={handleChanges} className='size'>
                         <option>---Select A Size---</option>
                         <option value='sml'>Small (8")</option>
                         <option value='med'>Medium (12")</option>
@@ -95,7 +100,7 @@ function Form(){
                 
 
             {/* <Link to='/confirmation'> */}
-                <button disabled={disabled}>
+                <button className="submit" disabled={disabled}>
                     Add To Order
                 </button>
             {/* </Link> */}
